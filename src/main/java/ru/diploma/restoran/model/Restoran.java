@@ -9,6 +9,7 @@ import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.List;
 import java.util.Set;
 @NoArgsConstructor
 @Getter
@@ -36,4 +37,11 @@ public class Restoran {
     @OnDelete(action = OnDeleteAction.CASCADE)
     @NotNull
     private User user;
+
+    @ManyToMany
+    @JoinTable(
+            name="restorans_users",
+            joinColumns=@JoinColumn(name="RESTORAN_ID", referencedColumnName="ID"),
+            inverseJoinColumns=@JoinColumn(name="USER_ID", referencedColumnName="ID"))
+    private List<User> users;
 }
