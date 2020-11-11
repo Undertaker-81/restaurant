@@ -2,7 +2,6 @@ package ru.diploma.restoran.model;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.NonNull;
 import lombok.Setter;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
@@ -10,7 +9,7 @@ import org.hibernate.annotations.OnDeleteAction;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.List;
-import java.util.Set;
+
 @NoArgsConstructor
 @Getter
 @Setter
@@ -30,7 +29,7 @@ public class Restoran {
             name="restorans_dish",
             joinColumns=@JoinColumn(name="RESTORAN_ID", referencedColumnName="ID"),
             inverseJoinColumns=@JoinColumn(name="DISH_ID", referencedColumnName="ID"))
-    private Set<Dish> menu;
+    private List<Dish> menu;
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)

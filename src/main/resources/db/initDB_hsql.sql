@@ -2,7 +2,6 @@ DROP TABLE user_roles IF EXISTS;
 DROP TABLE restorans_dish IF EXISTS;
 DROP TABLE restorans_users IF EXISTS;
 DROP TABLE dish IF EXISTS;
-DROP TABLE vote IF EXISTS;
 DROP TABLE restorans IF EXISTS;
 DROP TABLE users IF EXISTS;
 
@@ -57,22 +56,13 @@ CREATE TABLE restorans_dish
 
 );
 
-CREATE TABLE vote
-(
-    restoran_id      integer not null,
-    vote             integer not null,
-    date            TIMESTAMP DEFAULT now() NOT NULL,
-    FOREIGN KEY (restoran_id) REFERENCES RESTORANS (id) ON DELETE CASCADE
-);
-CREATE UNIQUE INDEX meals_unique_user_datetime_idx ON VOTE (RESTORAN_ID, date);
-
 CREATE TABLE restorans_users
 (
     user_id         integer not null,
     restoran_id     integer not null,
     date            TIMESTAMP DEFAULT now() NOT NULL,
     CONSTRAINT FK_USER_ID FOREIGN KEY (user_id)
-        REFERENCES dish (id),
+        REFERENCES users (id),
     CONSTRAINT FK_RESTORAN_ID_USER FOREIGN KEY (restoran_id)
         REFERENCES restorans (id)
 
