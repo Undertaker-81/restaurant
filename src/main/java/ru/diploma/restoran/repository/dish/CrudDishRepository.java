@@ -1,6 +1,7 @@
-package ru.diploma.restoran.repository;
+package ru.diploma.restoran.repository.dish;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.transaction.annotation.Transactional;
 import ru.diploma.restoran.model.Dish;
 
@@ -14,5 +15,6 @@ import java.util.List;
 @Transactional(readOnly = true)
 public interface CrudDishRepository extends JpaRepository<Dish, Integer> {
 
-    List<Dish> getAllBy();
+
+    List<Dish> findAllByRestorans(int restoranId);
 }

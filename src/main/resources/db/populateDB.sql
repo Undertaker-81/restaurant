@@ -1,4 +1,3 @@
-DELETE FROM user_roles;
 DELETE FROM RESTORANS_DISH;
 DELETE FROM RESTORANS_USERS;
 DELETE FROM DISH;
@@ -7,29 +6,17 @@ DELETE FROM users;
 
 ALTER SEQUENCE global_seq RESTART WITH 100000;
 
-INSERT INTO users (name, email, password)
-VALUES ('User1', 'user@yandex.ru', 'password'),
-       ('Admin', 'admin@gmail.com', 'admin'),
-       ('Admin2', 'admin2@gmail.com', 'admin'),
-       ('Admin3', 'admin3@gmail.com', 'admin'),
-       ('User2', 'user2@yandex.ru', 'password'),
-       ('User3', 'user3@yandex.ru', 'password'),
-       ('User4', 'user4@yandex.ru', 'password'),
-       ('User5', 'user5@yandex.ru', 'password'),
-       ('User6', 'user6@yandex.ru', 'password'),
-       ('User7', 'user7@yandex.ru', 'password');
-
-INSERT INTO user_roles (role, user_id)
-VALUES ('USER', 100000),
-       ('ADMIN', 100001),
-       ('ADMIN', 100002),
-       ('ADMIN', 100003),
-       ('USER', 100004),
-       ('USER', 100005),
-       ('USER', 100006),
-       ('USER', 100007),
-       ('USER', 100008),
-       ('USER', 100009);
+INSERT INTO users (name, email, ROLE,password)
+VALUES ('User1', 'user@yandex.ru', 'USER','password'),
+       ('Admin', 'admin@gmail.com','ADMIN', 'admin'),
+       ('Admin2', 'admin2@gmail.com', 'ADMIN', 'admin'),
+       ('Admin3', 'admin3@gmail.com', 'ADMIN','admin'),
+       ('User2', 'user2@yandex.ru', 'USER','password'),
+       ('User3', 'user3@yandex.ru', 'USER','password'),
+       ('User4', 'user4@yandex.ru', 'USER', 'password'),
+       ('User5', 'user5@yandex.ru', 'USER','password'),
+       ('User6', 'user6@yandex.ru', 'USER','password'),
+       ('User7', 'user7@yandex.ru','USER',  'password');
 
 INSERT INTO DISH (NAME, PRICE)
 VALUES ('Пельмени', 60),

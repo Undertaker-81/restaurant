@@ -1,4 +1,4 @@
-package ru.diploma.restoran.repository;
+package ru.diploma.restoran.repository.restoran;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
@@ -20,7 +20,7 @@ public interface CrudRestoranRepository extends JpaRepository<Restoran, Integer>
     @Query("DELETE FROM Restoran m WHERE m.id=:id AND m.user.id=:userId")
     int delete(@Param("id") int id, @Param("userId") int userId);
 
-
+    @Query("select r from Restoran  r")
     List<Restoran> getAll();
 
     Restoran getRestoransById(int id);
