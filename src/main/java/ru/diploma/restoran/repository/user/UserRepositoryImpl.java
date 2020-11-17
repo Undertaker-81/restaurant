@@ -25,4 +25,19 @@ public class UserRepositoryImpl implements UserRepository {
     public List<User> getAllbyRestoranID(int id) {
         return userRepository.findAllByRestorans(id);
     }
+
+    @Override
+    public boolean createUser(User user) {
+        return false;
+    }
+
+    @Override
+    public boolean vote(User user, int retoran_id) {
+        return false;
+    }
+
+    @Override
+    public User getUser(int id) {
+        return null;
+    }
 }

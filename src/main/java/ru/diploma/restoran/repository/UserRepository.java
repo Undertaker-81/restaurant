@@ -15,4 +15,10 @@ public interface UserRepository {
     List<User> getAll();
 
     List<User> getAllbyRestoranID(int id);
+
+    boolean createUser(User user);
+
+    boolean vote(User user, int restoranId);
+
+    User getUser(int id);
 }
