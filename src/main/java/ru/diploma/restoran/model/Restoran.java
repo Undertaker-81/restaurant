@@ -26,7 +26,7 @@ public class Restoran {
 
     @NotNull
     private String name;
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(
             name="restorans_dish",
             joinColumns=@JoinColumn(name="RESTORAN_ID", referencedColumnName="ID"),
@@ -64,9 +64,9 @@ public class Restoran {
         return "Restoran{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", menu=" + menu +
-                ", user=" + user +
-                ", users=" + users +
+               ", menu=" + menu +
+        //        ", user=" + user +
+        //        ", users=" + users +
                 '}';
     }
 }

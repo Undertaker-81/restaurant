@@ -25,7 +25,7 @@ public class RestoranRepositoryImpl implements RestoramRepository {
 
     @Override
     public Restoran getRestoran(int id) {
-        return null;
+        return repository.getRestoransById(id);
     }
 
     @Override

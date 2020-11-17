@@ -31,6 +31,10 @@ public class RestController {
 
     }
 
+    public Restoran getRestoran(int id){
+       return restoramRepository.getRestoran(id);
+    }
+
     public List<User> getAllByRestoran(int id){
         return userRepository.getAllbyRestoranID(id);
     }

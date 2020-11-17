@@ -23,6 +23,7 @@ public class Main {
             List<User> users = adminUserController.getAllByRestoran(100019);
             users.forEach(System.out::println);
             System.out.println();
+            System.out.println(adminUserController.getRestoran(100019));
         }
     }
 }

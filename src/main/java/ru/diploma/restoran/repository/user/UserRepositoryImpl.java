@@ -2,6 +2,7 @@ package ru.diploma.restoran.repository.user;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 import ru.diploma.restoran.model.User;
 import ru.diploma.restoran.repository.UserRepository;
 
@@ -12,6 +13,7 @@ import java.util.List;
  * 15.11.2020
  */
 @Repository
+@Transactional(readOnly = true)
 public class UserRepositoryImpl implements UserRepository {
     @Autowired
     private CrudUserRepository userRepository;
@@ -32,7 +34,9 @@ public class UserRepositoryImpl implements UserRepository {
     }
 
     @Override
+    @Transactional
     public boolean vote(User user, int retoran_id) {
+
         return false;
     }
 
