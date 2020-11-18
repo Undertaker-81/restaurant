@@ -26,8 +26,6 @@ public class Dish {
     @NotNull
     private int price;
 
-    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "menu")
-    private List<Restoran> restorans;
 
     @Override
     public boolean equals(Object o) {

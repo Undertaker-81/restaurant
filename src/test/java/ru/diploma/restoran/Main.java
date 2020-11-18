@@ -20,8 +20,8 @@ public class Main {
             RestController adminUserController = appCtx.getBean(RestController.class);
           //  List<User> userList = adminUserController.getAll();
          //   userList.forEach(System.out::println);
-            List<User> users = adminUserController.getAllByRestoran(100019);
-            users.forEach(System.out::println);
+          //  List<User> users = adminUserController.getAllByRestoran(100019);
+         //   users.forEach(System.out::println);
             System.out.println();
             System.out.println(adminUserController.getRestoran(100019));
         }

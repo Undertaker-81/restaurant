@@ -18,6 +18,8 @@
     <context:component-scan base-package="ru.diploma.**.repository.restoran"/>
     <context:component-scan base-package="ru.diploma.**.repository.user"/>
     <context:component-scan base-package="ru.diploma.**.repository.dish"/>
+    <context:component-scan base-package="ru.diploma.**.repository.menu"/>
+    <context:component-scan base-package="ru.diploma.**.repository.vote"/>
 
     <jpa:repositories base-package="ru.diploma.**.repository"/>
 

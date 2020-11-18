@@ -3,6 +3,7 @@ package ru.diploma.restoran.repository.restoran;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import ru.diploma.restoran.model.Restoran;
+import ru.diploma.restoran.model.User;
 import ru.diploma.restoran.repository.RestoramRepository;
 
 import java.time.LocalDate;
@@ -19,7 +20,7 @@ public class RestoranRepositoryImpl implements RestoramRepository {
     private CrudRestoranRepository repository;
 
     @Override
-    public List<Restoran> allRestoransByDate(LocalDate date) {
+    public List<Restoran> allRestorans() {
         return repository.getAll();
     }
 
@@ -29,12 +30,26 @@ public class RestoranRepositoryImpl implements RestoramRepository {
     }
 
     @Override
-    public int countVoteByRestoran(int restoranId, LocalDate date) {
-        return 0;
+    public User getAdmin(int id) {
+        return repository.getAdmin(id);
     }
 
     @Override
-    public void vote(int restoranId, int userId, LocalDateTime date) {
-
+    public void delete(int id) {
+        if (repository.existsById(id)){
+            repository.deleteById(id);
+        }
     }
+
+    @Override
+    public Restoran save(Restoran restoran, User user) {
+        if (restoran.getId() == null){
+            restoran.setUser(user);
+            repository.save(restoran);
+        }
+        return repository.save(restoran);
+    }
+
+
+
 }

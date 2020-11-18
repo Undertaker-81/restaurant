@@ -23,8 +23,7 @@ public class Restoran {
     @Id
     @SequenceGenerator(name = "global_seq", sequenceName = "global_seq", allocationSize = 1, initialValue = START_SEQ)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "global_seq")
-
-    private int id;
+    private Integer id;
 
     @NotNull
     private String name;
@@ -53,7 +52,13 @@ public class Restoran {
 
  */
 
+    public Integer getId() {
+        return id;
+    }
 
+    public void setUser(User user) {
+        this.user = user;
+    }
 
     @Override
     public boolean equals(Object o) {

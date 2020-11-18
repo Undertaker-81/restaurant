@@ -1,6 +1,7 @@
 package ru.diploma.restoran.repository;
 
 import ru.diploma.restoran.model.Restoran;
+import ru.diploma.restoran.model.User;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -12,11 +13,13 @@ import java.util.List;
  */
 public interface RestoramRepository {
 
-    List<Restoran> allRestoransByDate(LocalDate date);
+    List<Restoran> allRestorans();
 
     Restoran getRestoran(int id);
 
-    int countVoteByRestoran(int restoranId, LocalDate date);
+    User getAdmin(int id);
 
-    void vote(int restoranId, int userId, LocalDateTime date);
+    void delete(int id);
+
+    Restoran save(Restoran restoran, User user);
 }

@@ -25,5 +25,6 @@ public interface CrudRestoranRepository extends JpaRepository<Restoran, Integer>
 
     Restoran getRestoransById(int id);
 
-
+    @Query("select r.user from Restoran r where r.id=:id")
+    User getAdmin(@Param("id") int id);
 }
