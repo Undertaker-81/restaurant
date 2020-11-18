@@ -11,14 +11,13 @@ import java.util.List;
  */
 public interface UserRepository {
 
-
     List<User> getAll();
 
-    List<User> getAllbyRestoranID(int id);
-
-    boolean createUser(User user);
-
-    boolean vote(User user, int restoranId);
+    User createUser(User user);
 
     User getUser(int id);
+
+    User getAdminByRestoran(int id, int idRestoran);
+
+    void deleteUser(int id);
 }

@@ -29,15 +29,18 @@ public class User {
     @Enumerated(EnumType.STRING)
     private Role role;
 
-    @ManyToMany(fetch = FetchType.LAZY)
+
+
+  /*  @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
             name="restorans_users",
             joinColumns=@JoinColumn(name="USER_ID", referencedColumnName="ID"),
             inverseJoinColumns=@JoinColumn(name="RESTORAN_ID", referencedColumnName="ID"))
     private List<Restoran> restorans;
 
-//    @CollectionTable(name = "restorans_users", joinColumns = @JoinColumn(name = "date"))
-//    private LocalDateTime voteDate;
+   */
+
+
 
     @Override
     public boolean equals(Object o) {

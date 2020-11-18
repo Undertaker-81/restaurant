@@ -8,6 +8,8 @@ import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
 
@@ -26,6 +28,7 @@ public class Restoran {
 
     @NotNull
     private String name;
+    /*
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(
             name="restorans_dish",
@@ -33,18 +36,24 @@ public class Restoran {
             inverseJoinColumns=@JoinColumn(name="DISH_ID", referencedColumnName="ID"))
     private List<Dish> menu;
 
+     */
+
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @NotNull
     private User user;
-
+/*
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
             name="restorans_users",
             joinColumns=@JoinColumn(name="RESTORAN_ID", referencedColumnName="ID"),
             inverseJoinColumns=@JoinColumn(name="USER_ID", referencedColumnName="ID"))
     private List<User> users;
+
+ */
+
+
 
     @Override
     public boolean equals(Object o) {
@@ -64,9 +73,7 @@ public class Restoran {
         return "Restoran{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-               ", menu=" + menu +
         //        ", user=" + user +
-        //        ", users=" + users +
                 '}';
     }
 }

@@ -24,24 +24,28 @@ public class UserRepositoryImpl implements UserRepository {
     }
 
     @Override
-    public List<User> getAllbyRestoranID(int id) {
-        return userRepository.findAllByRestorans(id);
+    public User createUser(User user) {
+       if (user != null){
+           return userRepository.save(user);
+       }
+        return null;
     }
 
-    @Override
-    public boolean createUser(User user) {
-        return false;
-    }
-
-    @Override
-    @Transactional
-    public boolean vote(User user, int retoran_id) {
-
-        return false;
-    }
 
     @Override
     public User getUser(int id) {
-        return null;
+        return userRepository.getOne(id);
+    }
+
+    @Override
+    public User getAdminByRestoran(int id, int idRestoran) {
+        return userRepository.getAdmin(id, idRestoran);
+    }
+
+    @Override
+    public void deleteUser(int id) {
+        if (userRepository.existsById(id)){
+            userRepository.deleteById(id);
+        }
     }
 }

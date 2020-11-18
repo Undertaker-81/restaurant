@@ -21,18 +21,13 @@ public class DishRepositoryImpl implements DishRepository {
         this.repository = repository;
     }
 
-    @Override
-    public List<Dish> menuByRestoranByDate(int restoranId, LocalDate date) {
-        return repository.findAllByRestorans(restoranId);
-    }
 
     @Override
-    public List<Dish> createMenu(int restoranId, int userId) {
-        return null;
-    }
+    public Dish createDish(Dish dish) {
+        if (dish != null){
 
-    @Override
-    public Dish createDish(int user_id) {
-        return null;
+            return repository.save(dish);
+        }
+       return null;
     }
 }
