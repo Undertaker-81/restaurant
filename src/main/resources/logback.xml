@@ -11,7 +11,7 @@
         </encoder>
     </appender>
 
-    <logger name="ru.diploma.restoran" level="debug"/>
+    <logger name="ru.diploma.restaurant" level="debug"/>
     <logger name="org.hibernate.type" level="debug"/>
 
     <root level="info">

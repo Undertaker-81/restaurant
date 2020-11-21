@@ -15,7 +15,7 @@
 
 <!--    <context:component-scan base-package="ru.javawebinar.**.repository.jpa"/>-->
     <context:property-placeholder location="classpath:db/hsqldb.properties" system-properties-mode="OVERRIDE"/>
-    <context:component-scan base-package="ru.diploma.**.repository.restoran"/>
+    <context:component-scan base-package="ru.diploma.**.repository.restaurant"/>
     <context:component-scan base-package="ru.diploma.**.repository.user"/>
     <context:component-scan base-package="ru.diploma.**.repository.dish"/>
     <context:component-scan base-package="ru.diploma.**.repository.menu"/>
