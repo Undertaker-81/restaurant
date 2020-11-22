@@ -24,6 +24,7 @@ public class UserRepositoryImpl implements UserRepository {
     }
 
     @Override
+    @Transactional
     public User createUser(User user) {
        if (user != null){
            return userRepository.save(user);
@@ -34,15 +35,16 @@ public class UserRepositoryImpl implements UserRepository {
 
     @Override
     public User getUser(int id) {
-        return userRepository.getOne(id);
+        return userRepository.getUserById(id);
     }
 
     @Override
-    public User getAdminByRestoran(int id, int idRestoran) {
-        return userRepository.getAdmin(id, idRestoran);
+    public User getAdminByRestaurant(int idRestaurant) {
+        return userRepository.getAdmin(idRestaurant);
     }
 
     @Override
+    @Transactional
     public void deleteUser(int id) {
         if (userRepository.existsById(id)){
             userRepository.deleteById(id);

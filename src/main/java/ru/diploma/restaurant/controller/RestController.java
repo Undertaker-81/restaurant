@@ -25,7 +25,6 @@ public class RestController {
 
     public List<User> getAll(){
         return userRepository.getAll();
-
     }
 
     public Restaurant getRestaurant(int id){

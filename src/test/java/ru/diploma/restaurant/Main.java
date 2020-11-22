@@ -21,6 +21,8 @@ public class Main {
          //   users.forEach(System.out::println);
             System.out.println();
             System.out.println(adminUserController.getRestaurant(100019));
+            System.out.println(adminUserController.getAll());
+
         }
     }
 }

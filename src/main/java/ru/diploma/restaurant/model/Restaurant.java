@@ -10,7 +10,6 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.Objects;
 
-@NoArgsConstructor
 @Getter
 @Setter
 @Entity
@@ -49,6 +48,20 @@ public class Restaurant {
 
  */
 
+    public Restaurant(Integer id, @NotNull String name, @NotNull User user) {
+        this.id = id;
+        this.name = name;
+        this.user = user;
+    }
+
+    public Restaurant() {
+
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
     public Integer getId() {
         return id;
     }
@@ -62,7 +75,7 @@ public class Restaurant {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Restaurant restaurant = (Restaurant) o;
-        return id == restaurant.id;
+        return id.equals(restaurant.id);
     }
 
     @Override

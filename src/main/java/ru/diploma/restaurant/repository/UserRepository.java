@@ -17,7 +17,7 @@ public interface UserRepository {
 
     User getUser(int id);
 
-    User getAdminByRestoran(int id, int idRestoran);
+    User getAdminByRestaurant(int idRestaurant);
 
     void deleteUser(int id);
 }

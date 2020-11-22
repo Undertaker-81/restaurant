@@ -11,13 +11,12 @@ import java.util.Objects;
 @Getter
 @Setter
 @Entity
-@NoArgsConstructor
 public class Dish {
 
     @Id
     @SequenceGenerator(name = "global_seq", sequenceName = "global_seq", allocationSize = 1, initialValue = Restaurant.START_SEQ)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "global_seq")
-    private int id;
+    private Integer id;
 
     @NotNull
     private String name;
@@ -25,13 +24,51 @@ public class Dish {
     @NotNull
     private int price;
 
+    public Dish() {
+
+    }
+
+    public Dish(@NotNull String name, @NotNull int price) {
+        this.name = name;
+        this.price = price;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getPrice() {
+        return price;
+    }
+
+    public void setPrice(int price) {
+        this.price = price;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public Dish(Integer id, @NotNull String name, @NotNull int price) {
+        this.id = id;
+        this.name = name;
+        this.price = price;
+    }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Dish dish = (Dish) o;
-        return id == dish.id;
+        return id.equals(dish.id);
     }
 
     @Override

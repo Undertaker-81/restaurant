@@ -7,5 +7,11 @@
       <jdbc-driver>org.hsqldb.jdbc.JDBCDriver</jdbc-driver>
       <jdbc-url>jdbc:hsqldb:file:$PROJECT_DIR$/../temp/restaurant</jdbc-url>
     </data-source>
+    <data-source source="LOCAL" name="HSQLDB mem" uuid="b890d942-8dec-4a0c-b549-dd1aef592fc3">
+      <driver-ref>hsqldb.local</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.hsqldb.jdbc.JDBCDriver</jdbc-driver>
+      <jdbc-url>jdbc:hsqldb:mem:restaurant</jdbc-url>
+    </data-source>
   </component>
 </project>

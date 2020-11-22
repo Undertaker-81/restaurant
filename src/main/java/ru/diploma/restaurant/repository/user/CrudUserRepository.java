@@ -13,6 +13,8 @@ public interface CrudUserRepository extends JpaRepository<User, Integer> {
 
 //    @Query("select u from User u join fetch u.restorans restaurant where restaurant.id=:id")
 //    List<User> findAllByRestorans(@Param("id") int id);
-    @Query("select u from User u inner join Restaurant r where r.user.id=:id and r.id=:restaurant_id")
-    User getAdmin(@Param("id") int id, @Param("restaurant_id") int idRestaurant);
+    @Query("select u from User u inner join Restaurant r on r.user.id=u.id where r.id=:restaurant_id")
+    User getAdmin( @Param("restaurant_id") int idRestaurant);
+
+    User getUserById(int id);
 }

@@ -21,7 +21,7 @@ public class RestaurantRepositoryImpl implements RestaurantRepository {
 
     @Override
     public List<Restaurant> allRestaurant() {
-        return repository.getAll();
+        return repository.findAll();
     }
 
     @Override
@@ -35,9 +35,9 @@ public class RestaurantRepositoryImpl implements RestaurantRepository {
     }
 
     @Override
-    public void delete(int id) {
+    public void delete(int id, int adminId) {
         if (repository.existsById(id)){
-            repository.deleteById(id);
+            repository.delete(id, adminId);
         }
     }
 

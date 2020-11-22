@@ -9,16 +9,15 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.Objects;
 
-@NoArgsConstructor
-@Getter
-@Setter
+
+
 @Entity
 @Table(name="users")
 public class User {
     @Id
     @SequenceGenerator(name = "global_seq", sequenceName = "global_seq", allocationSize = 1, initialValue = Restaurant.START_SEQ)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "global_seq")
-    private int id;
+    private Integer id;
 
     @NotNull
     private String name;
@@ -26,9 +25,47 @@ public class User {
     @Enumerated(EnumType.STRING)
     private Role role;
 
+    public User() {
 
+    }
 
-  /*  @ManyToMany(fetch = FetchType.LAZY)
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
+    }
+
+    public User( @NotNull String name, Role role) {
+       // this.id = id;
+        this.name = name;
+        this.role = role;
+    }
+
+    public User(Integer id, @NotNull String name, Role role) {
+        this.id = id;
+        this.name = name;
+        this.role = role;
+    }
+
+    /*  @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
             name="restorans_users",
             joinColumns=@JoinColumn(name="USER_ID", referencedColumnName="ID"),
@@ -44,7 +81,7 @@ public class User {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
-        return id == user.id;
+        return id.equals(user.id);
     }
 
     @Override

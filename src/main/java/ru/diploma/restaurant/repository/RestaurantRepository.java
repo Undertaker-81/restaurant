@@ -17,7 +17,7 @@ public interface RestaurantRepository {
 
     User getAdmin(int id);
 
-    void delete(int id);
+    void delete(int id, int adminId);
 
     Restaurant save(Restaurant restaurant, User user);
 }
