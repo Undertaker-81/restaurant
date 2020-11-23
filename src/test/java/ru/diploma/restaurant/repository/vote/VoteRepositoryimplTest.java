@@ -12,7 +12,7 @@ import ru.diploma.restaurant.repository.VoteRepository;
 
 import java.time.Month;
 
-import static java.time.LocalDateTime.of;
+import static java.time.LocalDate.of;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -36,13 +36,13 @@ class VoteRepositoryimplTest extends AbstractRepositoryTest {
 
     @Test
     void getAllByDateAndRestaurantId() {
-        assertIterableEquals(repository.findAllByVoteDateAndRestaurantId(of(2020, Month.NOVEMBER, 20, 0 ,0), RestaurantTestData.RESTAURANT1_ID),
+        assertIterableEquals(repository.findAllByVoteDateAndRestaurantId(of(2020, Month.NOVEMBER, 20), RestaurantTestData.RESTAURANT1_ID),
                                 VoteTestData.list1);
     }
 
     @Test
     void getAllbyDate() {
-        assertIterableEquals(repository.findAllByVoteDate(of(2020, Month.NOVEMBER, 20, 0 ,0)), VoteTestData.listAllOneDate);
+        assertIterableEquals(repository.findAllByVoteDate(of(2020, Month.NOVEMBER, 20)), VoteTestData.listAllOneDate);
     }
 
     @Test

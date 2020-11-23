@@ -15,7 +15,7 @@ import java.util.List;
  */
 public interface MenuRepository extends JpaRepository<Menu, Integer> {
 
-    List<Menu> getAllByDateMenuAndIdRestaurant(@NotNull LocalDateTime dateMenu, @NotNull int idRestaurant);
+    List<Menu> getAllByDateMenuAndIdRestaurant(@NotNull LocalDate dateMenu, @NotNull int idRestaurant);
 
     List<Menu>   createMenu(int restaurantId, List<Dish> menu);
 

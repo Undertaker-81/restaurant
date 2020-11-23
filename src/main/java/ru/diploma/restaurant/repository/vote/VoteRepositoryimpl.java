@@ -26,11 +26,11 @@ public class VoteRepositoryimpl {
         return repository.save(vote);
     }
 
-    public List<Vote> getAllByDateAndRestaurant(LocalDateTime date, Integer restaurantId){
+    public List<Vote> getAllByDateAndRestaurant(LocalDate date, Integer restaurantId){
         return repository.findAllByVoteDateAndRestaurantId(date, restaurantId);
     }
 
-    public List<Vote> getAllbyDate(LocalDateTime dateTime){
+    public List<Vote> getAllbyDate(LocalDate dateTime){
         return repository.findAllByVoteDate(dateTime);
     }
 

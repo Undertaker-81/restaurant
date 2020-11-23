@@ -34,9 +34,9 @@ public class Menu {
 
     @Column(name = "menu_date", nullable = false)
     @NotNull
-    private LocalDateTime dateMenu;
+    private LocalDate dateMenu;
 
-    public Menu(Integer id,@NotNull int idRestaurant, @NotNull int idDish, @NotNull LocalDateTime dateMenu) {
+    public Menu(Integer id,@NotNull int idRestaurant, @NotNull int idDish, @NotNull LocalDate dateMenu) {
         this.id = id;
         this.idRestaurant = idRestaurant;
         this.idDish = idDish;

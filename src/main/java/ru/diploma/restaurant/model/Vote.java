@@ -37,9 +37,9 @@ public class Vote {
 
     @Column(name = "vote_date", nullable = false)
     @NotNull
-    private LocalDateTime voteDate;
+    private LocalDate voteDate;
 
-    public Vote(Integer id,  @NotNull int idUser, @NotNull int idRestaurant,@NotNull LocalDateTime voteDate) {
+    public Vote(Integer id,  @NotNull int idUser, @NotNull int idRestaurant,@NotNull LocalDate voteDate) {
         this.id = id;
         this.restaurantId = idRestaurant;
         this.userId = idUser;
@@ -74,11 +74,11 @@ public class Vote {
         this.userId = idUser;
     }
 
-    public LocalDateTime getDateVote() {
+    public LocalDate getDateVote() {
         return voteDate;
     }
 
-    public void setDateVote(LocalDateTime dateVote) {
+    public void setDateVote(LocalDate dateVote) {
         this.voteDate = dateVote;
     }
 

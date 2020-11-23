@@ -13,7 +13,7 @@ import ru.diploma.restaurant.repository.MenuRepository;
 import java.time.Month;
 import java.util.List;
 
-import static java.time.LocalDateTime.of;
+import static java.time.LocalDate.of;
 import static org.junit.jupiter.api.Assertions.*;
 
 /**
@@ -27,7 +27,7 @@ class MenuRepositoryImplTest extends AbstractRepositoryTest {
 
     @Test
     void getAllbyDateAndRestaurant() {
-        assertIterableEquals(repository.getAllByDateMenuAndIdRestaurant(of(2020, Month.NOVEMBER, 20, 0, 0), RestaurantTestData.RESTAURANT1_ID),
+        assertIterableEquals(repository.getAllByDateMenuAndIdRestaurant(of(2020, Month.NOVEMBER, 20), RestaurantTestData.RESTAURANT1_ID),
                 MenuTestData.SOKOL_MENU);
     }
 

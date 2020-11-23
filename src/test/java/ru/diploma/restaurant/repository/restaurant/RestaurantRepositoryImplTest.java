@@ -25,6 +25,7 @@ class RestaurantRepositoryImplTest extends AbstractRepositoryTest {
     @Test
     void allRestaurant() {
         assertIterableEquals(repository.allRestaurant(), RestaurantTestData.restaurants);
+        repository.allRestaurant().forEach(System.out::println);
     }
 
     @Test

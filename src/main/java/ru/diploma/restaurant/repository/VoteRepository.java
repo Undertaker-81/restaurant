@@ -14,9 +14,9 @@ import java.util.List;
  */
 public interface VoteRepository extends JpaRepository<Vote, Integer> {
 
-    List<Vote> findAllByVoteDateAndRestaurantId(LocalDateTime dateTime, Integer id);
+    List<Vote> findAllByVoteDateAndRestaurantId(LocalDate dateTime, Integer id);
 
-    List<Vote> findAllByVoteDate(LocalDateTime dateTime);
+    List<Vote> findAllByVoteDate(LocalDate dateTime);
 
 
 

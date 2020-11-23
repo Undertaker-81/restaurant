@@ -12,5 +12,12 @@ import java.util.List;
 
 public interface DishRepository  extends JpaRepository<Dish, Integer>{
 
+    public Dish createDish(Dish dish) ;
 
+
+
+    public Dish getDish(int id);
+
+
+    public List<Dish> getAlllDish();
 }
