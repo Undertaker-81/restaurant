@@ -18,7 +18,7 @@ import java.util.Objects;
 @Getter
 @Setter
 @Entity
-@Table(name = "VOTE")
+@Table(name = "vote")
 public class Vote {
 
     @Id
@@ -26,24 +26,24 @@ public class Vote {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "global_seq")
     private Integer id;
 
-    @JoinColumn(name = "user_id", nullable = false)
+    @Column(name = "user_id", nullable = false)
     @NotNull
-    private int idUser;
+    private int userId;
 
-    @JoinColumn(name = "restaurant_id", nullable = false)
+    @Column(name = "restaurant_id", nullable = false)
     @NotNull
-    private int idRestaurant;
+    private int restaurantId;
 
 
-    @JoinColumn(name = "date", nullable = false)
+    @Column(name = "vote_date", nullable = false)
     @NotNull
-    private LocalDateTime dateVote;
+    private LocalDateTime voteDate;
 
-    public Vote(Integer id,  @NotNull int idUser, @NotNull int idRestaurant,@NotNull LocalDateTime dateVote) {
+    public Vote(Integer id,  @NotNull int idUser, @NotNull int idRestaurant,@NotNull LocalDateTime voteDate) {
         this.id = id;
-        this.idRestaurant = idRestaurant;
-        this.idUser = idUser;
-        this.dateVote = dateVote;
+        this.restaurantId = idRestaurant;
+        this.userId = idUser;
+        this.voteDate = voteDate;
     }
 
     public Vote() {
@@ -59,27 +59,27 @@ public class Vote {
     }
 
     public int getIdRestaurant() {
-        return idRestaurant;
+        return restaurantId;
     }
 
     public void setIdRestaurant(int idRestaurant) {
-        this.idRestaurant = idRestaurant;
+        this.restaurantId = idRestaurant;
     }
 
     public int getIdUser() {
-        return idUser;
+        return userId;
     }
 
     public void setIdUser(int idUser) {
-        this.idUser = idUser;
+        this.userId = idUser;
     }
 
     public LocalDateTime getDateVote() {
-        return dateVote;
+        return voteDate;
     }
 
     public void setDateVote(LocalDateTime dateVote) {
-        this.dateVote = dateVote;
+        this.voteDate = dateVote;
     }
 
     @Override

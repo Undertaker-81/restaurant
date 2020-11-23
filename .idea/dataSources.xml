@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="restaurant" uuid="c91166eb-1d00-45f2-9c33-f6c8dfa26c8c">
+    <data-source source="LOCAL" name="restoran" uuid="c91166eb-1d00-45f2-9c33-f6c8dfa26c8c">
       <driver-ref>hsqldb.local</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>org.hsqldb.jdbc.JDBCDriver</jdbc-driver>
@@ -12,6 +12,12 @@
       <synchronize>true</synchronize>
       <jdbc-driver>org.hsqldb.jdbc.JDBCDriver</jdbc-driver>
       <jdbc-url>jdbc:hsqldb:mem:restaurant</jdbc-url>
+    </data-source>
+    <data-source source="LOCAL" name="restaurant@localhost" uuid="2513d34a-56cc-4559-b498-bddd191ce095">
+      <driver-ref>postgresql</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+      <jdbc-url>jdbc:postgresql://localhost:5432/restaurant</jdbc-url>
     </data-source>
   </component>
 </project>

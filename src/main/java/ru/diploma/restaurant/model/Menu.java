@@ -24,15 +24,15 @@ public class Menu {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "global_seq")
     private Integer id;
 
-    @JoinColumn(name = "restaurant_id", nullable = false)
+    @Column(name = "restaurant_id", nullable = false)
     @NotNull
     private int idRestaurant;
 
-    @JoinColumn(name = "dish_id", nullable = false)
+    @Column(name = "dish_id", nullable = false)
     @NotNull
     private int idDish;
 
-    @JoinColumn(name = "date", nullable = false)
+    @Column(name = "menu_date", nullable = false)
     @NotNull
     private LocalDateTime dateMenu;
 
@@ -58,5 +58,15 @@ public class Menu {
     @Override
     public int hashCode() {
         return Objects.hash(id);
+    }
+
+    @Override
+    public String toString() {
+        return "Menu{" +
+                "id=" + id +
+                ", idRestaurant=" + idRestaurant +
+                ", idDish=" + idDish +
+                ", dateMenu=" + dateMenu +
+                '}';
     }
 }

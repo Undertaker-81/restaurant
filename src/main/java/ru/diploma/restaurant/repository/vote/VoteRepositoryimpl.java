@@ -27,15 +27,15 @@ public class VoteRepositoryimpl {
     }
 
     public List<Vote> getAllByDateAndRestaurant(LocalDateTime date, Integer restaurantId){
-        return repository.findAllByDateVoteAndIdRestaurant(date, restaurantId);
+        return repository.findAllByVoteDateAndRestaurantId(date, restaurantId);
     }
 
     public List<Vote> getAllbyDate(LocalDateTime dateTime){
-        return repository.findAllByDateVote(dateTime);
+        return repository.findAllByVoteDate(dateTime);
     }
 
     public List<Vote> getAll(){
-        return repository.getAllBy();
+        return repository.findAll();
     }
 
 

@@ -3,6 +3,7 @@ package ru.diploma.restaurant.repository.vote;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import ru.diploma.restaurant.DishTestData;
+import ru.diploma.restaurant.RestaurantTestData;
 import ru.diploma.restaurant.VoteTestData;
 import ru.diploma.restaurant.model.Dish;
 import ru.diploma.restaurant.model.Vote;
@@ -34,16 +35,18 @@ class VoteRepositoryimplTest extends AbstractRepositoryTest {
     }
 
     @Test
-    void getAllByDateAndRestaurant() {
+    void getAllByDateAndRestaurantId() {
+        assertIterableEquals(repository.findAllByVoteDateAndRestaurantId(of(2020, Month.NOVEMBER, 20, 0 ,0), RestaurantTestData.RESTAURANT1_ID),
+                                VoteTestData.list1);
     }
 
     @Test
     void getAllbyDate() {
-        repository.findAllByDateVote(of(2020, Month.NOVEMBER, 22, 0 ,0));
+        assertIterableEquals(repository.findAllByVoteDate(of(2020, Month.NOVEMBER, 20, 0 ,0)), VoteTestData.listAllOneDate);
     }
 
     @Test
     void getAll() {
-        repository.getAllBy();
+        assertIterableEquals(repository.findAll(), VoteTestData.listAll);
     }
 }

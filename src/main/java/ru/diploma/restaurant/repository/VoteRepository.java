@@ -14,10 +14,11 @@ import java.util.List;
  */
 public interface VoteRepository extends JpaRepository<Vote, Integer> {
 
-    List<Vote> findAllByDateVoteAndIdRestaurant(LocalDateTime dateTime, Integer id);
+    List<Vote> findAllByVoteDateAndRestaurantId(LocalDateTime dateTime, Integer id);
 
-    List<Vote> findAllByDateVote(LocalDateTime dateTime);
-    @Query("select v FROM Vote v")
-    List<Vote> getAllBy();
+    List<Vote> findAllByVoteDate(LocalDateTime dateTime);
+
+
+
 
 }

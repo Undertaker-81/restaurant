@@ -23,18 +23,18 @@ public class MenuRepositoryImpl {
     @Autowired
     private MenuRepository repository;
 
-    public List<Menu> getAllbyDateAndRestaurant(int idRestaurant, LocalDate date){
+    public List<Menu> getAllbyDateAndRestaurant(int idRestaurant, LocalDateTime date){
         return repository.getAllByDateMenuAndIdRestaurant(date, idRestaurant);
     }
     @Transactional
-    public void createMenu(int restaurantId, List<Dish> menu){
+    public List<Menu>  createMenu(int restaurantId, List<Dish> menu){
         if (menu != null ){
             List<Menu> created = new ArrayList<>();
             for (Dish dishList : menu){
                 created.add(new Menu(null, restaurantId, dishList.getId(), LocalDateTime.now()));
             }
-            repository.saveAll(created);
+            return repository.saveAll(created);
         }
-
+        return null;
     }
 }
