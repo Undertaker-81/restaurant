@@ -21,6 +21,7 @@
     <context:component-scan base-package="ru.diploma.**.repository.menu"/>
     <context:component-scan base-package="ru.diploma.**.repository.vote"/>
 
+
     <jpa:repositories base-package="ru.diploma.**.repository"/>
 
     <jdbc:initialize-database data-source="dataSource" enabled="${database.init}">

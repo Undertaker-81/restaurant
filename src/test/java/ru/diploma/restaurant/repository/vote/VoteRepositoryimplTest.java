@@ -6,11 +6,16 @@ import ru.diploma.restaurant.DishTestData;
 import ru.diploma.restaurant.RestaurantTestData;
 import ru.diploma.restaurant.VoteTestData;
 import ru.diploma.restaurant.model.Dish;
+import ru.diploma.restaurant.model.Restaurant;
 import ru.diploma.restaurant.model.Vote;
 import ru.diploma.restaurant.repository.AbstractRepositoryTest;
+import ru.diploma.restaurant.repository.RestaurantRepository;
 import ru.diploma.restaurant.repository.VoteRepository;
+import ru.diploma.restaurant.to.RestaurantTo;
+import ru.diploma.restaurant.util.UtilRestaurant;
 
 import java.time.Month;
+import java.util.List;
 
 import static java.time.LocalDate.of;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -24,6 +29,9 @@ class VoteRepositoryimplTest extends AbstractRepositoryTest {
 
     @Autowired
     private VoteRepository repository;
+
+    @Autowired
+    private RestaurantRepository restaurantRepository;
 
     @Test
     void save() {
@@ -48,5 +56,13 @@ class VoteRepositoryimplTest extends AbstractRepositoryTest {
     @Test
     void getAll() {
         assertIterableEquals(repository.findAll(), VoteTestData.listAll);
+    }
+
+    @Test
+    void toList(){
+        List<Vote> votes = repository.findAll();
+        List<Restaurant> restaurantList = restaurantRepository.allRestaurant();
+        List<RestaurantTo> restaurantTos = UtilRestaurant.getTos(votes, restaurantList);
+        restaurantTos.forEach(System.out::println);
     }
 }

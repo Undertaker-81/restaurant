@@ -9,6 +9,7 @@
 
     <context:component-scan base-package="ru.diploma.**.controller"/>
 
+
     <!--  all resources inside folder src/main/webapp/resources are mapped so they can be referred to inside JSP files -->
     <mvc:resources mapping="/resources/**" location="/resources/"/>
 

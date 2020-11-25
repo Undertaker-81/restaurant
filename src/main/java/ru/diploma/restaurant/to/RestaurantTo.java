@@ -11,12 +11,12 @@ import java.util.Objects;
  * @author Panfilov Dmitriy
  * 11.11.2020
  */
-@NoArgsConstructor
+
 @Getter
 @Setter
 public class RestaurantTo {
 
-    private int id;
+
 
     private String name;
 
@@ -24,24 +24,31 @@ public class RestaurantTo {
 
     private int voteCount;
 
+    public RestaurantTo(String name, LocalDate date, int voteCount) {
+        this.name = name;
+        this.date = date;
+        this.voteCount = voteCount;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         RestaurantTo that = (RestaurantTo) o;
-        return id == that.id;
+        return voteCount == that.voteCount &&
+                Objects.equals(name, that.name) &&
+                Objects.equals(date, that.date);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id);
+        return Objects.hash(name, date, voteCount);
     }
 
     @Override
     public String toString() {
         return "RestaurantTo{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
+                "name='" + name + '\'' +
                 ", date=" + date +
                 ", voteCount=" + voteCount +
                 '}';
