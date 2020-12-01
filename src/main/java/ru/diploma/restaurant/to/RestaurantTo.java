@@ -30,6 +30,18 @@ public class RestaurantTo {
         this.voteCount = voteCount;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public LocalDate getDate() {
+        return date;
+    }
+
+    public int getVoteCount() {
+        return voteCount;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

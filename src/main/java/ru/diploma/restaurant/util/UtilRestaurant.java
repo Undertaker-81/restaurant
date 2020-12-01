@@ -16,14 +16,15 @@ import java.util.stream.Collectors;
  */
 public class UtilRestaurant {
 
-
-
     public static List<RestaurantTo> getTos(List<Vote> votes, List<Restaurant> restaurants){
-        int n = 0;
+
+
+
         return votes.stream()
                             .map(vote -> new RestaurantTo(restaurantName(restaurants, vote.getIdRestaurant()),
-                                            vote.getDateVote(), (int) getCountVote(vote.getDateVote(), vote.getIdRestaurant(), votes) ))
-                           // .distinct()
+                                            vote.getDateVote(),   (int) getCountVote(vote.getDateVote(), vote.getIdRestaurant(), votes) ))
+
+                            .distinct()
                             .collect(Collectors.toList());
 
     }

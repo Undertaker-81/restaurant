@@ -47,6 +47,18 @@ public class Menu {
 
     }
 
+    public int getIdDish() {
+        return idDish;
+    }
+
+    public void setIdDish(int idDish) {
+        this.idDish = idDish;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

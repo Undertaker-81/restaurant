@@ -4,20 +4,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import ru.diploma.restaurant.model.Restaurant;
-import ru.diploma.restaurant.model.User;
-import ru.diploma.restaurant.model.Vote;
-import ru.diploma.restaurant.repository.MenuRepository;
-import ru.diploma.restaurant.repository.RestaurantRepository;
-import ru.diploma.restaurant.repository.UserRepository;
-import ru.diploma.restaurant.repository.VoteRepository;
+import org.springframework.web.bind.annotation.*;
+import ru.diploma.restaurant.model.*;
+import ru.diploma.restaurant.repository.*;
+import ru.diploma.restaurant.to.RestaurantTo;
+import ru.diploma.restaurant.util.UtilRestaurant;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @author Dmitriy Panfilov
@@ -38,22 +33,45 @@ public class RestaurantRestController {
     @Autowired
     private MenuRepository menuRepository;
 
+    @Autowired
+    private DishRepository dishRepository;
+
     @GetMapping
     public List<Restaurant> getAll(){
         return restaurantRepository.allRestaurant();
     }
+
     @GetMapping("/vote")
-    public List<Vote> voteCurrentDate(@RequestParam(value = "date", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date){
-        return voteRepository.findAllByVoteDate(date);
-        //TODO TO
+    public List<RestaurantTo> voteCurrentDate(@RequestParam(value = "date", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date){
+           return UtilRestaurant.getTos(voteRepository.findAllByVoteDate(date), getAll());
     }
+
     @GetMapping("/{id}")
     public Restaurant getRestaurant(@PathVariable int id){
         return restaurantRepository.getRestaurant(id);
-        //TODO TO
     }
-    //TODO getmenuRestaurant
-    //TODO createVote
 
+    @GetMapping("/vote/{id}")
+    public List<RestaurantTo> voteRestaurantByDate(@PathVariable int id,
+            @RequestParam(value = "date", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date) {
+        return UtilRestaurant.getTos(voteRepository.findAllByVoteDateAndRestaurantId(date, id), getAll());
+    }
+
+    @GetMapping("/menu/{id}")
+    public List<Dish> getMenuByRestaurant(@PathVariable int id,
+                                           @RequestParam(value = "date", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date) {
+       List<Integer> idDish = menuRepository.getAllByDateMenuAndIdRestaurant(date, id)
+               .stream()
+               .map(Menu::getIdDish)
+               .collect(Collectors.toList());
+
+        return dishRepository.findAllById(idDish);
+    }
+
+
+    @PostMapping(value = "/vote", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public Vote createVote(@RequestBody Vote vote){
+       return voteRepository.save(vote);
+    }
 
 }
