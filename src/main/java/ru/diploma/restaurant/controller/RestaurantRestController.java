@@ -54,6 +54,7 @@ public class RestaurantRestController {
     @GetMapping("/vote/{id}")
     public List<RestaurantTo> voteRestaurantByDate(@PathVariable int id,
             @RequestParam(value = "date", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date) {
+        //TODO время голосования и сверка
         return UtilRestaurant.getTos(voteRepository.findAllByVoteDateAndRestaurantId(date, id), getAll());
     }
 

@@ -2,14 +2,14 @@ package ru.diploma.restaurant.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import ru.diploma.restaurant.model.Dish;
+import ru.diploma.restaurant.model.Menu;
 import ru.diploma.restaurant.model.Restaurant;
 import ru.diploma.restaurant.repository.DishRepository;
 import ru.diploma.restaurant.repository.MenuRepository;
 import ru.diploma.restaurant.repository.RestaurantRepository;
+import ru.diploma.restaurant.repository.UserRepository;
 
 import java.util.List;
 
@@ -31,20 +31,24 @@ public class AdminRestController {
     @Autowired
     private MenuRepository menuRepository;
 
+    @Autowired
+    private UserRepository userRepository;
+
     @GetMapping("/dish")
     public List<Dish>  menu(){
         return dishRepository.getAlllDish();
     }
-
-    public void createDish(Dish dish){
-       //TODO
+    @PostMapping(value = "/dish", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public Dish createDish(@RequestBody Dish dish){
+      return dishRepository.createDish(dish);
     }
-
-    public void createRestaurant(Restaurant restaurant){
-        //TODO
+    @PostMapping(value = "/restaurant", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public Restaurant createRestaurant(@RequestBody Restaurant restaurant){
+        //заглушка user
+       return restaurantRepository.save(restaurant, userRepository.getUser(100001));
     }
-
-    public void createMenu(int restaurantId, List<Dish> menu){
-        //TODO
+    @PostMapping(value = "/menu/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public List<Menu> createMenu(@PathVariable(value = "id") int restaurantId, @RequestBody List<Dish> menu){
+       return menuRepository.createMenu(restaurantId, menu);
     }
 }

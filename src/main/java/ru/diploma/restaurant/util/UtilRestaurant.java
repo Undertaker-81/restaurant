@@ -2,6 +2,7 @@ package ru.diploma.restaurant.util;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import ru.diploma.restaurant.model.Restaurant;
+import ru.diploma.restaurant.model.User;
 import ru.diploma.restaurant.model.Vote;
 import ru.diploma.restaurant.repository.RestaurantRepository;
 import ru.diploma.restaurant.to.RestaurantTo;
@@ -16,11 +17,9 @@ import java.util.stream.Collectors;
  */
 public class UtilRestaurant {
 
+
     public static List<RestaurantTo> getTos(List<Vote> votes, List<Restaurant> restaurants){
-
-
-
-        return votes.stream()
+       return votes.stream()
                             .map(vote -> new RestaurantTo(restaurantName(restaurants, vote.getIdRestaurant()),
                                             vote.getDateVote(),   (int) getCountVote(vote.getDateVote(), vote.getIdRestaurant(), votes) ))
 

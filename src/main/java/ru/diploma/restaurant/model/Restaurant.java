@@ -53,6 +53,11 @@ public class Restaurant {
         this.name = name;
         this.user = user;
     }
+    public Restaurant(Integer id, @NotNull String name) {
+        this.id = id;
+        this.name = name;
+
+    }
 
     public Restaurant() {
 
