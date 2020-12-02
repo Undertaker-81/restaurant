@@ -1,6 +1,7 @@
 package ru.diploma.restaurant.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.support.DataAccessUtils;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
@@ -11,6 +12,7 @@ import ru.diploma.restaurant.to.RestaurantTo;
 import ru.diploma.restaurant.util.UtilRestaurant;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -54,7 +56,6 @@ public class RestaurantRestController {
     @GetMapping("/vote/{id}")
     public List<RestaurantTo> voteRestaurantByDate(@PathVariable int id,
             @RequestParam(value = "date", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date) {
-        //TODO время голосования и сверка
         return UtilRestaurant.getTos(voteRepository.findAllByVoteDateAndRestaurantId(date, id), getAll());
     }
 
@@ -72,7 +73,20 @@ public class RestaurantRestController {
 
     @PostMapping(value = "/vote", consumes = MediaType.APPLICATION_JSON_VALUE)
     public Vote createVote(@RequestBody Vote vote){
-       return voteRepository.save(vote);
+       //Список голосов на текущий день
+      List<Vote> votes = voteRepository.findAllByVoteDate(LocalDate.now());
+      //если пользователь не голосовал(нет в с списке), то сохраняем голос
+      if (votes.stream().noneMatch(vote1 -> vote.getIdUser() == vote1.getIdUser())){
+          return voteRepository.save(vote);
+          //если голосовал, но до 11 утра, то передумал.
+          //редактируем запись
+      }else if (LocalTime.now().isBefore(LocalTime.of(11, 0))){
+        Vote editVote = DataAccessUtils.singleResult(votes.stream().filter(vote1 -> vote.getIdUser() == vote1.getIdUser()).collect(Collectors.toList())) ;
+          editVote.setIdRestaurant(vote.getIdRestaurant());
+          return voteRepository.save(editVote);
+      }else
+          return null;
+
     }
 
 }
