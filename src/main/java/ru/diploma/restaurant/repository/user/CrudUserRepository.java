@@ -17,4 +17,6 @@ public interface CrudUserRepository extends JpaRepository<User, Integer> {
     User getAdmin( @Param("restaurant_id") int idRestaurant);
 
     User getUserById(int id);
+
+    User getUserByEmail(String email);
 }

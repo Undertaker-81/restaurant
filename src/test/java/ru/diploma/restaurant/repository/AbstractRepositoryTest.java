@@ -9,7 +9,6 @@ import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
  * 21.11.2020
  */
 @SpringJUnitConfig(locations = {
-        "classpath:spring/spring-app.xml",
         "classpath:spring/spring-db.xml"
 })
 

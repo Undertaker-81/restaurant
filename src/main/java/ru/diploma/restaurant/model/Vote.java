@@ -39,10 +39,10 @@ public class Vote {
     @NotNull
     private LocalDate voteDate;
 
-    public Vote(Integer id,  @NotNull int idUser, @NotNull int idRestaurant,@NotNull LocalDate voteDate) {
+    public Vote(Integer id,  @NotNull int userId, @NotNull int restaurantId,@NotNull LocalDate voteDate) {
         this.id = id;
-        this.restaurantId = idRestaurant;
-        this.userId = idUser;
+        this.restaurantId = restaurantId;
+        this.userId = userId;
         this.voteDate = voteDate;
     }
 
@@ -58,28 +58,28 @@ public class Vote {
         this.id = id;
     }
 
-    public int getIdRestaurant() {
-        return restaurantId;
-    }
-
-    public void setIdRestaurant(int idRestaurant) {
-        this.restaurantId = idRestaurant;
-    }
-
-    public int getIdUser() {
+    public int getUserId() {
         return userId;
     }
 
-    public void setIdUser(int idUser) {
-        this.userId = idUser;
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 
-    public LocalDate getDateVote() {
+    public int getRestaurantId() {
+        return restaurantId;
+    }
+
+    public void setRestaurantId(int restaurantId) {
+        this.restaurantId = restaurantId;
+    }
+
+    public LocalDate getVoteDate() {
         return voteDate;
     }
 
-    public void setDateVote(LocalDate dateVote) {
-        this.voteDate = dateVote;
+    public void setVoteDate(LocalDate voteDate) {
+        this.voteDate = voteDate;
     }
 
     @Override

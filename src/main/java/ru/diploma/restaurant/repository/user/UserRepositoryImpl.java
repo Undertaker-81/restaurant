@@ -1,7 +1,11 @@
 package ru.diploma.restaurant.repository.user;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.diploma.restaurant.model.User;
 import ru.diploma.restaurant.repository.UserRepository;
@@ -14,7 +18,8 @@ import java.util.List;
  */
 @Repository
 @Transactional(readOnly = true)
-public class UserRepositoryImpl implements UserRepository {
+@Service("userService")
+public class UserRepositoryImpl implements UserRepository, UserDetailsService {
     @Autowired
     private CrudUserRepository userRepository;
 
@@ -49,5 +54,25 @@ public class UserRepositoryImpl implements UserRepository {
         if (userRepository.existsById(id)){
             userRepository.deleteById(id);
         }
+    }
+
+    @Override
+    public User getUserByEmail(String email) {
+        return userRepository.getUserByEmail(email);
+    }
+
+
+    @Override
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+        User myUser = userRepository.getUserByEmail(email.toLowerCase());
+        if (myUser == null) {
+            throw new UsernameNotFoundException("User " + email + " is not found");
+        }
+        UserDetails user = org.springframework.security.core.userdetails.User.builder()
+                .username(myUser.getEmail())
+                .password(myUser.getPassword())
+                .roles(myUser.getRole().getAuthority())
+                .build();
+        return user;
     }
 }

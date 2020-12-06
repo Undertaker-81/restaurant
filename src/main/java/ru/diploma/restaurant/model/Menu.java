@@ -36,7 +36,7 @@ public class Menu {
     @NotNull
     private LocalDate dateMenu;
 
-    public Menu(Integer id,@NotNull int idRestaurant, @NotNull int idDish, @NotNull LocalDate dateMenu) {
+    public Menu(Integer id, @NotNull int idDish,@NotNull int idRestaurant, @NotNull LocalDate dateMenu) {
         this.id = id;
         this.idRestaurant = idRestaurant;
         this.idDish = idDish;

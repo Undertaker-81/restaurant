@@ -3,6 +3,7 @@ package ru.diploma.restaurant.repository.user;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.function.Executable;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import ru.diploma.restaurant.RestaurantTestData;
 import ru.diploma.restaurant.UserTestData;
 import ru.diploma.restaurant.model.User;
@@ -20,14 +21,16 @@ import static org.junit.jupiter.api.Assertions.*;
  */
 class UserRepositoryImplTest extends AbstractRepositoryTest {
 
+    @Qualifier("userService")
     @Autowired
     private UserRepository repository;
 
     @Test
     void getAll() {
      //   assertArrayEquals(repository.getAll().toArray(), UserTestData.users.toArray());
-       assertIterableEquals(UserTestData.users, repository.getAll());
-      //  assertThat(repository.getAll()).isEqualTo(UserTestData.users);
+      // assertIterableEquals(UserTestData.users, repository.getAll());
+        assertThat(repository.getAll()).isEqualTo(UserTestData.users);
+
     }
 
     @Test
@@ -56,5 +59,11 @@ class UserRepositoryImplTest extends AbstractRepositoryTest {
         repository.deleteUser(UserTestData.USER1_ID);
         assertNull( repository.getUser(UserTestData.USER1_ID));
 
+    }
+
+    @Test
+    void getuserByEmail(){
+        User user = repository.getUserByEmail("user@yandex.ru");
+        assertThat(user).isEqualTo(UserTestData.user1);
     }
 }

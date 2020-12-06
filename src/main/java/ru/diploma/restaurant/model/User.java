@@ -6,6 +6,7 @@ import lombok.Setter;
 
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import java.util.Objects;
 
@@ -21,6 +22,13 @@ public class User {
 
     @NotNull
     private String name;
+
+    @NotNull
+    private String password;
+
+    @NotNull
+    @Email
+    private String email;
 
     @Enumerated(EnumType.STRING)
     private Role role;
@@ -53,16 +61,36 @@ public class User {
         this.role = role;
     }
 
-    public User( @NotNull String name, Role role) {
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public User(@NotNull String name, Role role, String email, String password) {
        // this.id = id;
         this.name = name;
         this.role = role;
+        this.email = email;
+        this.password = password;
     }
 
-    public User(Integer id, @NotNull String name, Role role) {
+    public User(Integer id, @NotNull String name, Role role,String password,  String email) {
         this.id = id;
         this.name = name;
         this.role = role;
+        this.email = email;
+        this.password = password;
     }
 
     /*  @ManyToMany(fetch = FetchType.LAZY)
@@ -75,18 +103,21 @@ public class User {
    */
 
 
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
-        return id.equals(user.id);
+        return Objects.equals(id, user.id) &&
+                Objects.equals(name, user.name) &&
+                Objects.equals(password, user.password) &&
+                Objects.equals(email, user.email) &&
+                role == user.role;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id);
+        return Objects.hash(id, name, password, email, role);
     }
 
     @Override
@@ -94,8 +125,9 @@ public class User {
         return "User{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
+                ", password='" + password + '\'' +
+                ", email='" + email + '\'' +
                 ", role=" + role +
-            //    ", restorans=" + restorans +
                 '}';
     }
 }

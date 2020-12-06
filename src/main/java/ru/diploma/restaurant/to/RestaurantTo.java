@@ -24,9 +24,24 @@ public class RestaurantTo {
 
     private int voteCount;
 
+    public RestaurantTo() {
+    }
+
     public RestaurantTo(String name, LocalDate date, int voteCount) {
         this.name = name;
         this.date = date;
+        this.voteCount = voteCount;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setDate(LocalDate date) {
+        this.date = date;
+    }
+
+    public void setVoteCount(int voteCount) {
         this.voteCount = voteCount;
     }
 

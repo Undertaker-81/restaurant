@@ -1,10 +1,10 @@
 package ru.diploma.restaurant.util;
 
-import org.springframework.beans.factory.annotation.Autowired;
+
 import ru.diploma.restaurant.model.Restaurant;
-import ru.diploma.restaurant.model.User;
+
 import ru.diploma.restaurant.model.Vote;
-import ru.diploma.restaurant.repository.RestaurantRepository;
+
 import ru.diploma.restaurant.to.RestaurantTo;
 
 import java.time.LocalDate;
@@ -20,8 +20,8 @@ public class UtilRestaurant {
 
     public static List<RestaurantTo> getTos(List<Vote> votes, List<Restaurant> restaurants){
        return votes.stream()
-                            .map(vote -> new RestaurantTo(restaurantName(restaurants, vote.getIdRestaurant()),
-                                            vote.getDateVote(),   (int) getCountVote(vote.getDateVote(), vote.getIdRestaurant(), votes) ))
+                            .map(vote -> new RestaurantTo(restaurantName(restaurants, vote.getRestaurantId()),
+                                            vote.getVoteDate(),   (int) getCountVote(vote.getVoteDate(), vote.getRestaurantId(), votes) ))
 
                             .distinct()
                             .collect(Collectors.toList());
@@ -31,7 +31,7 @@ public class UtilRestaurant {
     public static long getCountVote(LocalDate date, int restaurantId, List<Vote> votes){
         long sum = 0;
         sum = votes.stream()
-                            .filter(vote -> vote.getDateVote().equals(date) && vote.getIdRestaurant()==restaurantId)
+                            .filter(vote -> vote.getVoteDate().equals(date) && vote.getRestaurantId()==restaurantId)
                             .count();
         return sum;
     }

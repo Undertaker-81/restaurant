@@ -20,4 +20,6 @@ public interface UserRepository {
     User getAdminByRestaurant(int idRestaurant);
 
     void deleteUser(int id);
+
+    User getUserByEmail(String email);
 }

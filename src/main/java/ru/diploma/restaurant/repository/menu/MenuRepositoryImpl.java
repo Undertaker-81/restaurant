@@ -31,7 +31,7 @@ public class MenuRepositoryImpl {
         if (menu != null ){
             List<Menu> created = new ArrayList<>();
             for (Dish dishList : menu){
-                created.add(new Menu(null, restaurantId, dishList.getId(), LocalDate.now()));
+                created.add(new Menu(null,  dishList.getId(), restaurantId, LocalDate.now()));
             }
             return repository.saveAll(created);
         }

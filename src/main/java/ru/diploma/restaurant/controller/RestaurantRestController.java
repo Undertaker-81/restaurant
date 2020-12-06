@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.support.DataAccessUtils;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.MediaType;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import ru.diploma.restaurant.model.*;
 import ru.diploma.restaurant.repository.*;
@@ -54,9 +53,9 @@ public class RestaurantRestController {
     }
 
     @GetMapping("/vote/{id}")
-    public List<RestaurantTo> voteRestaurantByDate(@PathVariable int id,
+    public RestaurantTo voteRestaurantByDate(@PathVariable int id,
             @RequestParam(value = "date", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date) {
-        return UtilRestaurant.getTos(voteRepository.findAllByVoteDateAndRestaurantId(date, id), getAll());
+        return DataAccessUtils.singleResult(UtilRestaurant.getTos(voteRepository.findAllByVoteDateAndRestaurantId(date, id), getAll())) ;
     }
 
     @GetMapping("/menu/{id}")
@@ -76,13 +75,13 @@ public class RestaurantRestController {
        //Список голосов на текущий день
       List<Vote> votes = voteRepository.findAllByVoteDate(LocalDate.now());
       //если пользователь не голосовал(нет в с списке), то сохраняем голос
-      if (votes.stream().noneMatch(vote1 -> vote.getIdUser() == vote1.getIdUser())){
+      if (votes.stream().noneMatch(vote1 -> vote.getUserId() == vote1.getUserId())){
           return voteRepository.save(vote);
           //если голосовал, но до 11 утра, то передумал.
           //редактируем запись
       }else if (LocalTime.now().isBefore(LocalTime.of(11, 0))){
-        Vote editVote = DataAccessUtils.singleResult(votes.stream().filter(vote1 -> vote.getIdUser() == vote1.getIdUser()).collect(Collectors.toList())) ;
-          editVote.setIdRestaurant(vote.getIdRestaurant());
+        Vote editVote = DataAccessUtils.singleResult(votes.stream().filter(vote1 -> vote.getUserId() == vote1.getUserId()).collect(Collectors.toList())) ;
+          editVote.setRestaurantId(vote.getRestaurantId());
           return voteRepository.save(editVote);
       }else
           return null;
