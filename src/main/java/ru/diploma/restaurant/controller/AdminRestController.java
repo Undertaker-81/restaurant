@@ -5,6 +5,7 @@ import org.springframework.http.MediaType;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.annotation.*;
 import ru.diploma.restaurant.model.Dish;
 import ru.diploma.restaurant.model.Menu;
@@ -49,13 +50,16 @@ public class AdminRestController {
 
     @PostMapping(value = "/restaurant", consumes = MediaType.APPLICATION_JSON_VALUE)
     public Restaurant createRestaurant(@RequestBody Restaurant restaurant){
-        //заглушка user
-       return restaurantRepository.save(restaurant, userRepository.getUser(100001));
+        //залогиненый админ
+       return restaurantRepository.save(restaurant, userRepository.getUser(loginUserId()));
     }
 
     @PostMapping(value = "/menu/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public List<Menu> createMenu(@PathVariable(value = "id") int restaurantId, @RequestBody List<Dish> menu){
-       return menuRepository.createMenu(restaurantId, menu);
+    public List<Menu> createMenu(@PathVariable(value = "id") int restaurantId, @RequestBody List<Dish> menu) throws HttpRequestMethodNotSupportedException {
+        if (loginUserId() == userRepository.getAdminByRestaurant(restaurantId).getId()){
+            return menuRepository.createMenu(restaurantId, menu);
+        } else throw new HttpRequestMethodNotSupportedException("");
+
     }
 
     public int loginUserId (){

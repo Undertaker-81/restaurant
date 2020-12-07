@@ -1,27 +1,32 @@
 вывод голосов на дату:
 get http://localhost:8080/restaurant/vote?date=2020-11-20
+Authorization: Basic user2@yandex.ru password
 
 вывод всех ресторанов:
 get http://localhost:8080/restaurant/
+Authorization: Basic user2@yandex.ru password
 
 вывод ресторана:
 get http://localhost:8080/id
+Authorization: Basic user2@yandex.ru password
 
 вывод голосов за ресторан на дату:
 get http://localhost:8080/restaurant/vote/id?date=2020-11-20
+Authorization: Basic user2@yandex.ru password
 
 меню ресторана на дату:
 
 get http://localhost:8080/restaurant/menu/100019?date=2020-11-20
-
+Authorization: Basic user2@yandex.ru password
 голосование:
 
 POST http://localhost:8080/restaurant/vote/
 Accept: */*
 Cache-Control: no-cache
 Content-Type: application/json
+Authorization: Basic user2@yandex.ru password
 
-{ "id": "", "userId" : 100000, "restaurantId" : 100019, "voteDate": "2020-12-01" }
+{  "restaurantId" : 100019 }
 
 Добавление еды:
 
@@ -74,3 +79,14 @@ GET http://localhost:8080/user/100000
 
 Authorization: Basic YWRtaW5AZ21haWwuY29tOmFkbWlu
 DELETE http://localhost:8080/user/100001
+
+Логины для тестирования:
+user@yandex.ru password
+user2@yandex.ru password
+user3@yandex.ru password
+user4@yandex.ru password
+user6@yandex.ru password
+user7@yandex.ru password
+admin@gmai.com
+admin2@gmai.com
+admin3@gmai.com

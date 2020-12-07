@@ -6,7 +6,7 @@ DELETE FROM users;
 
 ALTER SEQUENCE global_seq RESTART WITH 100000;
 
-INSERT INTO users (name, email, ROLE,password)
+INSERT INTO users (name, email, ROLE, password)
 VALUES ('User1', 'user@yandex.ru', 'USER','password'),
        ('Admin', 'admin@gmail.com','ADMIN', 'admin'),
        ('Admin2', 'admin2@gmail.com', 'ADMIN', 'admin'),

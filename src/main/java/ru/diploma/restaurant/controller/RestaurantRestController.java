@@ -1,9 +1,14 @@
 package ru.diploma.restaurant.controller;
 
+import org.hibernate.mapping.Collection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.support.DataAccessUtils;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.MediaType;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.annotation.*;
 import ru.diploma.restaurant.model.*;
 import ru.diploma.restaurant.repository.*;
@@ -36,6 +41,9 @@ public class RestaurantRestController {
 
     @Autowired
     private DishRepository dishRepository;
+
+    @Autowired
+    private UserRepository userRepository;
 
     @GetMapping
     public List<Restaurant> getAll(){
@@ -71,21 +79,30 @@ public class RestaurantRestController {
 
 
     @PostMapping(value = "/vote", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public Vote createVote(@RequestBody Vote vote){
+    public Vote createVote(@RequestBody Vote vote) throws HttpRequestMethodNotSupportedException {
+        vote.setUserId(loginUserId());
+        vote.setVoteDate(LocalDate.now());
        //Список голосов на текущий день
       List<Vote> votes = voteRepository.findAllByVoteDate(LocalDate.now());
       //если пользователь не голосовал(нет в с списке), то сохраняем голос
-      if (votes.stream().noneMatch(vote1 -> vote.getUserId() == vote1.getUserId())){
+
+      if (votes.stream().noneMatch(vote1 -> vote1.getUserId()==loginUserId())){
           return voteRepository.save(vote);
           //если голосовал, но до 11 утра, то передумал.
           //редактируем запись
       }else if (LocalTime.now().isBefore(LocalTime.of(11, 0))){
-        Vote editVote = DataAccessUtils.singleResult(votes.stream().filter(vote1 -> vote.getUserId() == vote1.getUserId()).collect(Collectors.toList())) ;
+        Vote editVote = DataAccessUtils.singleResult(votes.stream().filter(vote1 -> loginUserId() == vote1.getUserId()).collect(Collectors.toList())) ;
           editVote.setRestaurantId(vote.getRestaurantId());
           return voteRepository.save(editVote);
       }else
-          return null;
+           throw new HttpRequestMethodNotSupportedException("");
 
+    }
+    public int loginUserId (){
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        UserDetails userDetail = (UserDetails) auth.getPrincipal();
+        String name = userDetail.getUsername();
+        return userRepository.getUserByEmail(name).getId();
     }
 
 }

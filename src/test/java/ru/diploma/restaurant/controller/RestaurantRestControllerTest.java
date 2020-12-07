@@ -8,10 +8,7 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-import ru.diploma.restaurant.DishTestData;
-import ru.diploma.restaurant.RestaurantTestData;
-import ru.diploma.restaurant.TestUtil;
-import ru.diploma.restaurant.VoteTestData;
+import ru.diploma.restaurant.*;
 import ru.diploma.restaurant.controller.json.JsonUtil;
 import ru.diploma.restaurant.model.Dish;
 import ru.diploma.restaurant.model.Restaurant;
@@ -28,6 +25,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static ru.diploma.restaurant.DishTestData.*;
 import static ru.diploma.restaurant.TestUtil.readFromJson;
+import static ru.diploma.restaurant.TestUtil.userHttpBasic;
 
 /**
  * @author Dmitriy Panfilov
@@ -41,8 +39,8 @@ class RestaurantRestControllerTest extends AbstractControllerTest{
     private VoteRepository voteRepository;
     @Test
     void getAll() throws Exception {
-        MvcResult action = perform(MockMvcRequestBuilders.get(REST_URL))
-                // .with(userHttpBasic(user)))
+        MvcResult action = perform(MockMvcRequestBuilders.get(REST_URL)
+                .with(userHttpBasic(UserTestData.user1)))
                 .andExpect(status().isOk())
                 .andDo(print())
                 .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON)).andReturn();
@@ -53,8 +51,8 @@ class RestaurantRestControllerTest extends AbstractControllerTest{
     @Test
     void voteCurrentDate() throws Exception {
         MvcResult action = perform(MockMvcRequestBuilders.get(REST_URL + "/vote")
-                .queryParam("date", "2020-11-20"))
-                // .with(userHttpBasic(user)))
+                .queryParam("date", "2020-11-20")
+                 .with(userHttpBasic(UserTestData.user1)))
                 .andExpect(status().isOk())
                 .andDo(print())
                 .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON)).andReturn();
@@ -65,8 +63,8 @@ class RestaurantRestControllerTest extends AbstractControllerTest{
 
     @Test
     void getRestaurant() throws Exception {
-        ResultActions action = perform(MockMvcRequestBuilders.get(REST_URL + "/{id}", RestaurantTestData.RESTAURANT1_ID))
-                // .with(userHttpBasic(user)))
+        ResultActions action = perform(MockMvcRequestBuilders.get(REST_URL + "/{id}", RestaurantTestData.RESTAURANT1_ID)
+                 .with(userHttpBasic(UserTestData.user1)))
                 .andExpect(status().isOk())
                 .andDo(print())
                 .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON));
@@ -78,8 +76,8 @@ class RestaurantRestControllerTest extends AbstractControllerTest{
     void voteRestaurantByDate() throws Exception {
 
         ResultActions action = perform(MockMvcRequestBuilders.get(REST_URL + "/vote/{id}", RestaurantTestData.RESTAURANT1_ID)
-                .queryParam("date", "2020-11-20"))
-                // .with(userHttpBasic(user)))
+                .queryParam("date", "2020-11-20")
+                .with(userHttpBasic(UserTestData.user1)))
                 .andExpect(status().isOk())
                 .andDo(print())
                 .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON));
@@ -90,8 +88,8 @@ class RestaurantRestControllerTest extends AbstractControllerTest{
     @Test
     void getMenuByRestaurant() throws Exception {
         MvcResult action = perform(MockMvcRequestBuilders.get(REST_URL + "/menu/{id}", RestaurantTestData.RESTAURANT1_ID)
-                .queryParam("date", "2020-11-20"))
-                // .with(userHttpBasic(user)))
+                .queryParam("date", "2020-11-20")
+                 .with(userHttpBasic(UserTestData.user1)))
                 .andExpect(status().isOk())
                 .andDo(print())
                 .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON)).andReturn();
@@ -105,12 +103,26 @@ class RestaurantRestControllerTest extends AbstractControllerTest{
         Vote newVote = VoteTestData.getNew();
         ResultActions action = perform(MockMvcRequestBuilders.post(REST_URL + "/vote")
                 .contentType(MediaType.APPLICATION_JSON)
-                // .with(userHttpBasic(user))
+                 .with(userHttpBasic(UserTestData.user1))
                 .content(JsonUtil.writeValue(newVote)));
         Vote created = readFromJson(action, Vote.class);
         int newId = created.getId();
         newVote.setId(newId);
         assertEquals(newVote, created);
         assertEquals(voteRepository.getOne(newId), newVote);
+    }
+    @Test
+    void createVoteRepeat() throws Exception {
+        Vote newVote = VoteTestData.getNew();
+        ResultActions action = perform(MockMvcRequestBuilders.post(REST_URL + "/vote")
+                .contentType(MediaType.APPLICATION_JSON)
+                .with(userHttpBasic(UserTestData.user1))
+                .content(JsonUtil.writeValue(newVote)));
+        ResultActions actionRepeat = perform(MockMvcRequestBuilders.post(REST_URL + "/vote")
+                .contentType(MediaType.APPLICATION_JSON)
+                .with(userHttpBasic(UserTestData.user1))
+                .content(JsonUtil.writeValue(newVote)))
+                .andExpect(status().isMethodNotAllowed());
+
     }
 }

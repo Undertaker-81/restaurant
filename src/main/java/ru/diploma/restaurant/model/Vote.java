@@ -45,6 +45,9 @@ public class Vote {
         this.userId = userId;
         this.voteDate = voteDate;
     }
+    public Vote(@NotNull int restaurantId){
+        this.restaurantId = restaurantId;
+    }
 
     public Vote() {
 
