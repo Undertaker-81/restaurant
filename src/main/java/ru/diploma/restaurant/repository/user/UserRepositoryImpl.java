@@ -16,9 +16,8 @@ import java.util.List;
  * @author Dmitriy Panfilov
  * 15.11.2020
  */
-
+@Repository("userService")
 @Transactional(readOnly = true)
-@Service("userService")
 public class UserRepositoryImpl implements UserRepository, UserDetailsService {
     @Autowired
     private CrudUserRepository userRepository;
