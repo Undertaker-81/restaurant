@@ -11,6 +11,7 @@ import java.util.Objects;
 @Getter
 @Setter
 @Entity
+@NoArgsConstructor
 public class Dish {
 
     @Id
@@ -24,38 +25,12 @@ public class Dish {
     @NotNull
     private int price;
 
-    public Dish() {
-
-    }
 
     public Dish(@NotNull String name, @NotNull int price) {
         this.name = name;
         this.price = price;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public int getPrice() {
-        return price;
-    }
-
-    public void setPrice(int price) {
-        this.price = price;
-    }
-
-    public Integer getId() {
-        return id;
-    }
 
     public Dish(Integer id, @NotNull String name, @NotNull int price) {
         this.id = id;
