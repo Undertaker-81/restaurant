@@ -21,6 +21,7 @@ public class DishTestData {
     public static final Dish dish7 = new Dish(7, "салат зимний", 60);
     public static final Dish dish8 = new Dish(8, "кофе", 25);
     public static final Dish dish9 = new Dish(9, "борщ", 40);
+    public static final Integer DISH1_ID = 1;
 
     public static List<Dish> dishes = List.of(dish1,dish2,dish3,dish4,dish5,dish6,dish7,dish8,dish9);
 

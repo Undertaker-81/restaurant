@@ -19,6 +19,4 @@ public interface MenuRepository extends JpaRepository<Menu, Integer> {
 
     List<Menu> getAllByDateMenuAndRestaurantId(@NotNull LocalDate dateMenu, @NotNull int restaurantId);
 
-   // List<Menu>   createMenu(int restaurantId, List<Dish> menu);
-
 }

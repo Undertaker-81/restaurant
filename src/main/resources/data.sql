@@ -24,9 +24,9 @@ VALUES ('Пельмени', 60),
        ('борщ', 40);
 
 INSERT INTO RESTAURANT (NAME, USER_ID)
-VALUES ('Сокол', 1),
-       ('Рога и копыта', 2),
-       ('Шашлык и пляски', 3);
+VALUES ('Сокол', 2),
+       ('Рога и копыта', 3),
+       ('Шашлык и пляски', 4);
 
 INSERT INTO MENU(DISH_ID, RESTAURANT_ID, MENU_DATE)
 VALUES (1, 1, '2020-11-20'),
