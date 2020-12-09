@@ -1,12 +1,11 @@
 package ru.diploma.restaurant.model;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 /**
@@ -17,19 +16,30 @@ import java.time.LocalDateTime;
 @Setter
 @Entity
 @Table(name = "vote")
+@Data
+@EqualsAndHashCode(callSuper = true)
+@ToString(callSuper = true)
 @NoArgsConstructor
+@AllArgsConstructor
 public class Vote extends BaseEntity  {
 
     @Column(name = "restaurant_id", nullable = false)
     @NotNull
-    private int idRestaurant;
+    private int restaurantId;
 
     @Column(name = "user_id", nullable = false)
     @NotNull
-    private int idUser;
+    private int userId;
 
-    @Column(name = "date", nullable = false)
+    @Column(name = "vote_date", nullable = false)
     @NotNull
-    private LocalDateTime dateVote;
+    private LocalDate voteDate;
+
+    public Vote(Integer id, @NotNull int userId, @NotNull int restaurantId,  @NotNull LocalDate voteDate) {
+        super(id);
+        this.restaurantId = restaurantId;
+        this.userId = userId;
+        this.voteDate = voteDate;
+    }
 }
 

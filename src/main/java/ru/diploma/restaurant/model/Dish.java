@@ -1,8 +1,6 @@
 package ru.diploma.restaurant.model;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -11,6 +9,10 @@ import javax.validation.constraints.NotNull;
 @Setter
 @Entity
 @Table(name = "dish")
+@Data
+@EqualsAndHashCode(callSuper = true)
+@ToString(callSuper = true)
+@AllArgsConstructor
 @NoArgsConstructor
 public class Dish extends BaseEntity{
 
@@ -20,4 +22,10 @@ public class Dish extends BaseEntity{
 
     @NotNull
     private int price;
+
+    public Dish(Integer id, @NotNull String name, @NotNull int price) {
+        super(id);
+        this.name = name;
+        this.price = price;
+    }
 }

@@ -1,11 +1,10 @@
 package ru.diploma.restaurant.model;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 /**
@@ -16,19 +15,30 @@ import java.time.LocalDateTime;
 @Setter
 @Entity
 @NoArgsConstructor
+@Data
+@EqualsAndHashCode(callSuper = true)
+@ToString(callSuper = true)
+@AllArgsConstructor
 @Table(name = "menu")
 public class Menu extends BaseEntity  {
 
     @NotNull
     @Column(name = "restaurant_id", nullable = false)
-    private int idRestoran;
+    private int restaurantId;
 
     @NotNull
     @Column(name = "dish_id", nullable = false)
     private int idDish;
 
-    @Column(name = "date", nullable = false)
+    @Column(name = "menu_date", nullable = false)
     @NotNull
-    private LocalDateTime dateMenu;
+    private LocalDate dateMenu;
+
+    public Menu(Integer id, @NotNull int restaurantId, @NotNull int idDish, @NotNull LocalDate dateMenu) {
+        super(id);
+        this.restaurantId = restaurantId;
+        this.idDish = idDish;
+        this.dateMenu = dateMenu;
+    }
 }
 

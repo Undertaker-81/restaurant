@@ -1,8 +1,6 @@
 package ru.diploma.restaurant.model;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.springframework.data.domain.Persistable;
 
 import javax.persistence.*;
@@ -14,7 +12,11 @@ import java.io.Serializable;
 @Setter
 @Entity
 @Table(name = "users")
+@Data
+@EqualsAndHashCode(callSuper = true)
+@ToString(callSuper = true)
 @NoArgsConstructor
+@AllArgsConstructor
 public class User extends BaseEntity implements Serializable {
 
 
@@ -22,15 +24,21 @@ public class User extends BaseEntity implements Serializable {
     private String name;
 
     @NotNull
-    private String password;
-
-    @NotNull
     @Email
     private String email;
+
+    @NotNull
+    private String password;
+
 
     @Enumerated(EnumType.STRING)
     private Role role;
 
-
-
+    public User(Integer id, @NotNull String name,  @NotNull @Email String email, @NotNull String password, Role role) {
+        super(id);
+        this.name = name;
+        this.password = password;
+        this.email = email;
+        this.role = role;
+    }
 }
