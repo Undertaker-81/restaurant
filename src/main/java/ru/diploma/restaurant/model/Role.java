@@ -1,4 +1,4 @@
-package ru.diploma.restoran.model;
+package ru.diploma.restaurant.model;
 
 public enum Role {
     USER,
