@@ -4,10 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.support.DataAccessUtils;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.MediaType;
-import org.springframework.security.core.Authentication;
+
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
+
 import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.annotation.*;
 import ru.diploma.restaurant.AuthUser;
@@ -18,9 +17,8 @@ import ru.diploma.restaurant.model.Vote;
 import ru.diploma.restaurant.repository.*;
 import ru.diploma.restaurant.to.RestaurantTo;
 import ru.diploma.restaurant.util.UtilRestaurant;
-import springfox.documentation.annotations.ApiIgnore;
 
-import javax.validation.Valid;
+
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;

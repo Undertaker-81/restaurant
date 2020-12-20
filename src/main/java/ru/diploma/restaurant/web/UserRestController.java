@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import ru.diploma.restaurant.model.Role;
 import ru.diploma.restaurant.model.User;
 import ru.diploma.restaurant.repository.UserRepository;
-import springfox.documentation.annotations.ApiIgnore;
+
 
 
 import javax.validation.Valid;
