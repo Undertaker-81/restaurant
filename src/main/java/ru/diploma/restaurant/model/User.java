@@ -1,10 +1,14 @@
 package ru.diploma.restaurant.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import lombok.*;
 import org.springframework.data.domain.Persistable;
+import ru.diploma.restaurant.util.JsonDeserializers;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
@@ -17,17 +21,23 @@ import java.io.Serializable;
 @ToString(callSuper = true)
 @NoArgsConstructor
 @AllArgsConstructor
+
 public class User extends BaseEntity implements Serializable {
 
 
-    @NotNull
+    @NotEmpty
+
     private String name;
 
-    @NotNull
+
+    @NotEmpty
     @Email
+    @Column(unique=true)
     private String email;
 
-    @NotNull
+    @NotEmpty
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    @JsonDeserialize(using = JsonDeserializers.PasswordDeserializer.class)
     private String password;
 
 

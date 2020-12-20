@@ -1,16 +1,16 @@
 //alter sequence global_seq increment by 1;
 
 INSERT INTO users (name, email, ROLE, password)
-VALUES ('User1', 'user@yandex.ru', 'USER','password'),
-       ('Admin', 'admin@gmail.com','ADMIN', 'admin'),
-       ('Admin2', 'admin2@gmail.com', 'ADMIN', 'admin'),
-       ('Admin3', 'admin3@gmail.com', 'ADMIN','admin'),
-       ('User2', 'user2@yandex.ru', 'USER','password'),
-       ('User3', 'user3@yandex.ru', 'USER','password'),
-       ('User4', 'user4@yandex.ru', 'USER', 'password'),
-       ('User5', 'user5@yandex.ru', 'USER','password'),
-       ('User6', 'user6@yandex.ru', 'USER','password'),
-       ('User7', 'user7@yandex.ru','USER',  'password');
+VALUES ('User1', 'user@yandex.ru', 'USER','{noop}password'),
+       ('Admin', 'admin@gmail.com','ADMIN', '{noop}admin'),
+       ('Admin2', 'admin2@gmail.com', 'ADMIN', '{noop}admin'),
+       ('Admin3', 'admin3@gmail.com', 'ADMIN','{noop}admin'),
+       ('User2', 'user2@yandex.ru', 'USER','{noop}password'),
+       ('User3', 'user3@yandex.ru', 'USER','{noop}password'),
+       ('User4', 'user4@yandex.ru', 'USER', '{noop}password'),
+       ('User5', 'user5@yandex.ru', 'USER','{noop}password'),
+       ('User6', 'user6@yandex.ru', 'USER','{noop}password'),
+       ('User7', 'user7@yandex.ru','USER',  '{noop}password');
 
 INSERT INTO DISH (NAME, PRICE)
 VALUES ('Пельмени', 60),

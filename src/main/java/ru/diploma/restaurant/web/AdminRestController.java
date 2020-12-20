@@ -14,6 +14,7 @@ import ru.diploma.restaurant.repository.DishRepository;
 import ru.diploma.restaurant.repository.RestaurantRepository;
 import ru.diploma.restaurant.repository.UserRepository;
 import ru.diploma.restaurant.service.MenuService;
+import springfox.documentation.annotations.ApiIgnore;
 
 import java.util.List;
 
@@ -21,6 +22,7 @@ import java.util.List;
  * @author Dmitriy Panfilov
  * 23.11.2020
  */
+
 @RestController
 @RequestMapping(value = AdminRestController.REST_URL, produces = MediaType.APPLICATION_JSON_VALUE)
 public class AdminRestController {

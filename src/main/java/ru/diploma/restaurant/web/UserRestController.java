@@ -7,10 +7,13 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.annotation.*;
+import ru.diploma.restaurant.model.Role;
 import ru.diploma.restaurant.model.User;
 import ru.diploma.restaurant.repository.UserRepository;
+import springfox.documentation.annotations.ApiIgnore;
 
 
+import javax.validation.Valid;
 import java.util.List;
 
 
@@ -18,6 +21,7 @@ import java.util.List;
  * @author Dmitriy Panfilov
  * 23.11.2020
  */
+
 @RestController
 @RequestMapping( produces = MediaType.APPLICATION_JSON_VALUE)
 public class UserRestController {
@@ -28,10 +32,13 @@ public class UserRestController {
     private UserRepository userRepository;
 
 
+    //TODO valid emai on exist
     @PostMapping(value = "/register", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public User create(@RequestBody User user){
+    public User create(@Valid @RequestBody User user){
+        user.setRole(Role.USER);
         return userRepository.save(user);
     }
+
     @GetMapping(REST_URL)
     public List<User> getAll(){
         return userRepository.findAll();

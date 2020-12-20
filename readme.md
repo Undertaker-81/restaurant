@@ -20,3 +20,8 @@
 P.S.: убедитесь, что все работает с последней версией, которая находится на github :)
 
 P. P. S.: предположим, что ваш API будет использоваться разработчиком frontend для создания frontend поверх этого.
+### SWAGGER
+####REST Api Documentation
+   
+
+http://localhost:8080/swagger-ui/index.html
