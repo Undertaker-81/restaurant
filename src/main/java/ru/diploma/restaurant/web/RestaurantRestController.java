@@ -35,6 +35,9 @@ public class RestaurantRestController {
     static final String REST_URL = "/restaurant";
 
     @Autowired
+    private RestaurantToRepository restaurantToRepository;
+
+    @Autowired
     private VoteRepository voteRepository;
 
     @Autowired
@@ -56,7 +59,9 @@ public class RestaurantRestController {
 
     @GetMapping("/vote")
     public List<RestaurantTo> voteCurrentDate(@RequestParam(value = "date", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date){
-        return UtilRestaurant.getTos(voteRepository.findAllByVoteDate(date), getAll());
+      //  return UtilRestaurant.getTos(voteRepository.findAllByVoteDate(date), getAll());
+        return restaurantToRepository.getVotes(date);
+
     }
 
     @GetMapping("/{id}")
